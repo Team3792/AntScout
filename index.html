@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AntScout Basic Info</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <script>
+        function submitBasicDetails() {
+            // Check if everything is filled out
+            if (document.getElementById("scoutName").value == "" || document.getElementById("matchNumber").value == "" || document.getElementById("teamNumber").value == "") {
+                alert("Please fill out all fields!");
+                return;
+            } else {
+                let scoutName = document.getElementById("scoutName").value;
+                let matchNumber = document.getElementById("matchNumber").value;
+                let teamNumber = document.getElementById("teamNumber").value;
+                localStorage.setItem("currentScoutName", scoutName);
+                localStorage.setItem("currentMatchNumber", matchNumber);
+                localStorage.setItem("currentTeamNumber", teamNumber);
+                if (localStorage.getItem("pastData") == null) {
+                    localStorage.setItem("pastData", JSON.stringify([]));
+                } else {
+
+                }
+                window.location.href = "scout.html";
+            }
+            
+        }
+    </script>
+
+    <!-- Says welcome to  AntScout in the center along with a textbox for scout name, match number, and team number. -->
+    <div class="container mx-auto">
+        <div class="flex flex-col items-center justify-center h-screen">
+            <h1 class="text-5xl font-bold">Welcome to AntScout!</h1>
+            <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-row items-center justify-center mt-2">
+                    <label for="scoutName" class="text-xl font-bold">Scout Name: </label>
+                    <input type="text" id="scoutName" class="border-2 border-black rounded-md  ml-2">
+                </div>
+                <div class="flex flex-row items-center justify-center  mt-2">
+                    <label for="matchNumber" class="text-xl font-bold">Match Number: </label>
+                    <input type="text" id="matchNumber" class="border-2 border-black rounded-md  ml-2">
+                </div>
+                <div class="flex flex-row items-center justify-center mt-2">
+                    <label for="teamNumber" class="text-xl font-bold">Team Number: </label>
+                    <input type="text" id="teamNumber" class="border-2 border-black rounded-md  ml-2">
+                </div>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3" onclick="submitBasicDetails()">Submit</button>
+        </div>    
+    
+</body>
+</html>
