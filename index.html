@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AntScout Basic Info</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.0/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="daisyui.css" rel="stylesheet" type="text/css" />
+    <script src="daisyui.js"></script>
 
     <script src="p5.js"></script>
     <script src="p5.sound.min.js"></script>
@@ -17,6 +17,12 @@
 </head>
 <body onload="init()">
     <script>
+        window.addEventListener("load", () => {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("service-worker.js");
+            }
+        });
+
         function submitBasicDetails() {
             // Check if everything is filled out
             if (document.getElementById("scoutName").value == "" || document.getElementById("matchNumber").value == "" || document.getElementById("teamNumber").value == "") {
