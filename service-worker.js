@@ -38,7 +38,10 @@ self.addEventListener("install", (event) => {
       // response isn't fulfilled from the HTTP cache; i.e., it will be
       // from the network.
     //   await cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
-        await cache.addAll(STATIC_FILES);
+        // add it one  by one 
+        for (let i = 0; i < STATIC_FILES.length; i++) {
+            await cache.add(STATIC_FILES[i]);
+        }
     })()
   );
   // Force the waiting service worker to become the active service worker.
