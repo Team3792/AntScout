@@ -55,6 +55,9 @@
                 let uploadIndicator = document.getElementById("uploadIndicator");
                 uploadIndicator.innerHTML = "You have " + pastData.length + " items to upload.";
             }
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("service-worker.js");
+            }
         }
         // needs to be fixed
         async function  uploadAll()  {
