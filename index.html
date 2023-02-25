@@ -8,8 +8,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="sketch2.js"></script>
+
+
 </head>
-<body>
+<body onload="init()">
     <script>
         function submitBasicDetails() {
             // Check if everything is filled out
@@ -32,8 +38,40 @@
             }
             
         }
-    </script>
 
+        function init() {
+            // check how many items are in the pastData array
+            let pastData = JSON.parse(localStorage.getItem("pastData"));
+            if (pastData == null) {
+                let uploadIndicator = document.getElementById("uploadIndicator");
+                uploadIndicator.innerHTML = "You have 0 items to upload.";
+            } else {
+                let uploadIndicator = document.getElementById("uploadIndicator");
+                uploadIndicator.innerHTML = "You have " + pastData.length + " items to upload.";
+            }
+        }
+        // needs to be fixed
+        async function  uploadAll()  {
+            let pastData = JSON.parse(localStorage.getItem("pastData"));
+            let uploadIndicator = document.getElementById("uploadIndicator");
+            uploadIndicator.innerHTML = "Uploading...";
+            for (let i = 0; i < pastData.length; i++) {
+                let data = pastData[i];
+                console.log(data);
+                response = await fetch(data, { mode: 'no-cors'})
+                response.then((response) => {
+                    if (response.status == 200) {
+                        localStorage.setItem("pastData", JSON.stringify([]));
+                        uploadIndicator.innerHTML = "Upload successful!";
+                    } else {
+                        uploadIndicator.innerHTML = "Upload failed!";
+                    }
+                });
+            }
+        }
+    </script>
+    <button class="bg-light hover:bg-light-700 text-white font-bold py-2 px-4 rounded mt-3" onclick="uploadAll()"><img src="https://img.icons8.com/color/48/null/send-letter--v1.png"/></button>
+    <p id="uploadIndicator"></p>
     <!-- Says welcome to  AntScout in the center along with a textbox for scout name, match number, and team number. -->
     <div class="container mx-auto">
         <div class="flex flex-col items-center justify-center h-screen">

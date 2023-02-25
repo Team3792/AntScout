@@ -69,9 +69,9 @@ function draw() {
     engagedButton.update();
   dockedButton.update();
   
-  image(ground, 50, 330, 30, ground.height/ground.width * 30);
-  image(mid, 50, 230, 30, mid.height/mid.width * 30);
-  image(high, 50, 130, 30,high.height/high.width * 30);
+  image(ground, 50, 330, 50, ground.height/ground.width * 50);
+  image(mid, 50, 230, 50, mid.height/mid.width * 50);
+  image(high, 50, 130, 50,high.height/high.width * 50);
 //       this.centerY = 330;
 //          break;
        
