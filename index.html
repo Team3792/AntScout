@@ -12,17 +12,12 @@
     <script src="p5.js"></script>
     <script src="p5.sound.min.js"></script>
     <script src="sketch2.js"></script>
+    <script src="service-worker.js"></script>
 
 
 </head>
 <body onload="init()">
     <script>
-        window.addEventListener("load", () => {
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("service-worker.js");
-            }
-        });
-
         function submitBasicDetails() {
             // Check if everything is filled out
             if (document.getElementById("scoutName").value == "" || document.getElementById("matchNumber").value == "" || document.getElementById("teamNumber").value == "") {
