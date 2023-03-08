@@ -27,7 +27,11 @@ const urlsToCache = [
   'daisyui.js',
   'daisyui.css',
   'jsoncrush.min.js',
-  'service-worker.js'
+  'service-worker.js',
+  'BackspaceButton.js',
+  'FieldImage.png',
+  'x.png',
+  'auto-select.html'
 ];
 
 // Install the Service Worker and cache files

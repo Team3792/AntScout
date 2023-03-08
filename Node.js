@@ -12,7 +12,8 @@ class Node{
     this.clickableObject = new ClickableObject(20, 20,     this.centerX, this.centerY);
     
     this.clicked = false;
-    this.frameCountLastClick = 0;
+    this.frameCountLastClick = -100;
+    this.startDeleting = -1000;
     
   }
   
@@ -44,6 +45,11 @@ class Node{
     
   }
   
+  delete(){
+    this.deleting = true;
+    this.startDeleting = frameCount;
+  }
+  
   update(){
     this.show();
     // if(isTouching && touches.length > 0){
@@ -73,6 +79,12 @@ class Node{
       this.clicked = false;
     }
     }
+    
+    if(frameCount - this.startDeleting < 60){
+      this.showDeleteRing(frameCount - this.startDeleting);
+    }else{
+      this.deleting = false;
+    }
   }
   
   showRing(trans){
@@ -82,6 +94,14 @@ class Node{
     strokeWeight(15);
     ellipse(this.centerX, this.centerY, 70);
     
+  }
+  
+  showDeleteRing(trans){
+      noFill();
+    stroke(217, 52, 52, 255 - trans/60*255);
+    
+    strokeWeight(15);
+    ellipse(this.centerX, this.centerY, 70);
   }
   
   show(){

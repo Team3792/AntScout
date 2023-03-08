@@ -4,9 +4,11 @@
 
 var teamData = {
     "number":  1,
+    "scouter": "",
     "tournament":  "STL",
     "allianceScore":  0,
     "oppAllianceScore":  0,
+    "autoPosition": "",
     "match":  1,
     "autoPlatform":  0, // 0 = nothing, 1 = docked, 2 = docked and engaged
     "endgamePlatform":  0, // 0 = nothing, 1 = docked, 2 = docked and engaged
@@ -181,29 +183,52 @@ const formEntryNumbers = {
     "time26": "entry.1043324044",
     "where26": "entry.1003600373",
     "match": "entry.670115602",
-    "tournament": "entry.179993385"
+    "tournament": "entry.179993385",
+    "allianceScore": "entry.1559035364",
+    "oppAllianceScore": "entry.1252711965",
+    "autoPosition": "entry.1870199551",
+    "scouter": "entry.102432438"
 };
+
+var intervalfn;
 
 function init() {
     teamData["number"] = localStorage.getItem("currentTeamNumber");
     teamData["match"] = localStorage.getItem("currentMatchNumber");
+    teamData["autoPosition"] = localStorage.getItem("currentAutoPosition")
+    teamData["scouter"] = localStorage.getItem("currentScoutName")
 
     document.getElementById("teamNumber").innerHTML = "Team Number: " + teamData["number"];
     document.getElementById("matchNumber").innerHTML = "Match Number: " + teamData["match"];
 
     // call updatePlatform every 1 second
-    setInterval(updatePlatform, 1000);
+    intervalfn = setInterval(updatePlatform, 1000);
 }
 
 function updatePlatform() {
     if (matchIsFinished) {
         processData(scorings);
         window.localStorage.setItem("currentTeamData", JSON.stringify(teamData));
+        document.getElementsByTagName("canvas")[0].remove()
+        document.getElementById("my-modal").click()
+        
+
+    }
+}
+
+function finishForm() {
+    var aScore = document.getElementById("allianceScore").value
+    var oaScore = document.getElementById("oppAllianceScore").value
+    if (aScore == "" || oaScore == "") {
+        alert("Fill all fields!")
+    } else {
+        teamData['allianceScore'] = aScore;
+        teamData['oppAllianceScore'] = oaScore;
+        window.localStorage.setItem("currentTeamData", JSON.stringify(teamData));
         completeScout();
         resetPlatform();
         // go back to home page
         window.location.href = "index.html";
-
     }
 }
 
@@ -240,96 +265,6 @@ function completeScout() {
 }
 
 function resetPlatform() {
-    teamData = {
-        "number":  1,
-        "tournament":  "STL",
-        "allianceScore":  0,
-        "oppAllianceScore":  0,
-        "match":  1,
-        "autoPlatform":  0, // 0 = nothing, 1 = docked, 2 = docked and engaged
-        "endgamePlatform":  0, // 0 = nothing, 1 = docked, 2 = docked and engaged
-        "type0":  "",
-        "time0":  "",
-        "where0":  "", // 0 = botton, 1 = center, 2 = top
-        "type1":  "",
-        "time1":  "",
-        "where1":  "", // 0 = botton, 1 = center, 2 = top
-        "type2":  "",
-        "time2":  "",
-        "where2":  "", // 0 = botton, 1 = center, 2 = top
-        "type3":  "",
-        "time3": "",
-        "where3": "", // 0 = botton, 1 = center, 2 = top
-        "type4": "",
-        "time4": "",
-        "where4": "", // 0 = botton, 1 = center, 2 = top
-        "type5": "",
-        "time5": "",
-        "where5": "", // 0 = botton, 1 = center, 2 = top
-        "type6": "",
-        "time6": "",
-        "where6": "", // 0 = botton, 1 = center, 2 = top
-        "type7": "",
-        "time7": "",
-        "where7": "", // 0 = botton, 1 = center, 2 = top
-        "type8": "",
-        "time8": "",
-        "where8": "", // 0 = botton, 1 = center, 2 = top
-        "type9": "",
-        "time9": "",
-        "where9": "", // 0 = botton, 1 = center, 2 = top
-        "type10": "",
-        "time10": "",
-        "where10": "", // 0 = botton, 1 = center, 2 = top
-        "type11": "",
-        "time11": "",
-        "where11": "", // 0 = botton, 1 = center, 2 = top
-        "type12": "",
-        "time12": "",
-        "where12": "", // 0 = botton, 1 = center, 2 = top
-        "type13": "",
-        "time13": "",
-        "where13": "", // 0 = botton, 1 = center, 2 = top
-        "type14": "",
-        "time14": "",
-        "where14": "", // 0 = botton, 1 = center, 2 = top
-        "type15": "",
-        "time15": "",
-        "where15": "", // 0 = botton, 1 = center, 2 = top
-        "type16": "",
-        "time16": "",
-        "where16": "", // 0 = botton, 1 = center, 2 = top
-        "type17": "",
-        "time17": "",
-        "where17": "", // 0 = botton, 1 = center, 2 = top
-        "type18": "",
-        "time18": "",
-        "where18": "", // 0 = botton, 1 = center, 2 = top
-        "type19": "",
-        "time19": "",
-        "where19": "", // 0 = botton, 1 = center, 2 = top
-        "type20": "",
-        "time20": "",
-        "where20": "", // 0 = botton, 1 = center, 2 = top
-        "type21": "",
-        "time21": "",
-        "where21": "", // 0 = botton, 1 = center, 2 = top
-        "type22": "",
-        "time22": "",
-        "where22": "", // 0 = botton, 1 = center, 2 = top
-        "type23": "",
-        "time23": "",
-        "where23": "", // 0 = botton, 1 = center, 2 = top
-        "type24": "",
-        "time24": "",
-        "where24": "", // 0 = botton, 1 = center, 2 = top
-        "type25": "",
-        "time25": "",
-        "where25": "", // 0 = botton, 1 = center, 2 = top
-        "type26": "",
-        "time26": "",
-        "where26": "", // 0 = botton, 1 = center, 2 = top
-    }    
     localStorage.setItem("currentTeamData", JSON.stringify({}));
     localStorage.setItem("currentMatchNumber", "");
     localStorage.setItem("currentTeamNumber", "");

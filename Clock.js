@@ -25,11 +25,11 @@ class Clock{
       gameSection = 1;
     }else if(startedTeleOp){
       
-      if(startedTeleOp && this.timeSinceTeleOp <= 105){
-      this.time = 105 - this.timeSinceTeleOp;
+      if(startedTeleOp && this.timeSinceTeleOp <= 135){
+      this.time = 135 - this.timeSinceTeleOp;
       gameSection = 2;
     } if(this.time <=30){
-      this.time = 105 - this.timeSinceTeleOp;
+      this.time = 135 - this.timeSinceTeleOp;
       gameSection = 3;
     }
      if(this.time <=0){

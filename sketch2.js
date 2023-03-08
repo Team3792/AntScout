@@ -29,6 +29,7 @@ function draw() {
     if(selectionState == "origin"){
       
       let d = dist(startX, startY, endingLocationX, endingLocationY)/30;
+      window.localStorage.setItem("currentAutoPosition", startX + "," + startY + "," + endingLocationX + "," + endingLocationY)
       strokeWeight(10);
       stroke(214, 73, 73);
       if(startX < width/2){

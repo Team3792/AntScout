@@ -16,10 +16,9 @@ let endedAuto = false;
 let startTeleOpButton;
 let matchIsFinished = false;
 let finishedScreen;
-
+let backspaceButton;
 let ground, mid, high;
-
-
+let xImage;
 
 function preload(){
   carpetBackground = loadImage("carpet.jfif");
@@ -28,6 +27,7 @@ function preload(){
   ground  = loadImage("ground.png");
   mid = loadImage("mid.png");
   high = loadImage("high.png");
+  xImage = loadImage("x.png");
 }
 
 function setup() {
@@ -55,6 +55,9 @@ function setup() {
   
   
   finishedScreen = new FinishedScreen();
+  
+  backspaceButton = new BackspaceButton();
+  console.log(backspaceButton);
   
 }
 
@@ -114,6 +117,9 @@ function draw() {
   
   pop();
   clock.update();
+  if((started && !endedAuto) || (startedTeleOp && !matchIsFinished)){
+  backspaceButton.update();
+  }
   
   if(matchIsFinished){
     finishedScreen.show();
