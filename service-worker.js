@@ -22,6 +22,7 @@ const precacheResources = [
   '/AntScout/docked.png',
   '/AntScout/engaged.png',
   '/AntScout/ground.png',
+  '/AntScout/Node.js',
   '/AntScout/scout.html',
   '/AntScout/sketch.js',
   '/AntScout/sketch2.js',
