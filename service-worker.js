@@ -1,6 +1,6 @@
 // List the files to cache
-const CACHE_NAME = 'my-cache-v1';
-const urlsToCache = [
+const cacheName = 'cache-v1';
+const precacheResources = [
   'index.html',
   'index.css',
   'index.js',
@@ -34,23 +34,25 @@ const urlsToCache = [
   'auto-select.html'
 ];
 
-// Install the Service Worker and cache files
-self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        return cache.addAll(urlsToCache);
-      })
-  );
+// When the service worker is installing, open the cache and add the precache resources to it
+self.addEventListener('install', (event) => {
+  console.log('Service worker install event!');
+  event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(precacheResources)));
 });
 
-// Fetch cached files when offline
-self.addEventListener('fetch', function(event) {
+self.addEventListener('activate', (event) => {
+  console.log('Service worker activate event!');
+});
+
+// When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
+self.addEventListener('fetch', (event) => {
+  console.log('Fetch intercepted for:', event.request.url);
   event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Return cached response if found, otherwise fetch from network
-        return response || fetch(event.request);
-      })
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request);
+    }),
   );
 });

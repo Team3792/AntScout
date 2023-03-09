@@ -40,6 +40,7 @@
 
         function init() {
             // check how many items are in the pastData array
+            document.getElementById("modal-2").click()
             let pastData = JSON.parse(localStorage.getItem("pastData"));
             if (pastData == null) {
                 let uploadIndicator = document.getElementById("uploadIndicator");
@@ -51,8 +52,24 @@
             if (!navigator.onLine) {
                 uploadIndicator.innerHTML = "Connect to internet before uploading. You are not connected to the internet."
             }
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("service-worker.js");
+            // Register the service worker
+            if ('serviceWorker' in navigator) {
+            // Wait for the 'load' event to not block other work
+            window.addEventListener('load', async () => {
+                // Try to register the service worker.
+                try {
+                // Capture the registration for later use, if needed
+                let reg;
+
+                // In production, use the normal service worker registration
+                reg = await navigator.serviceWorker.register('/service-worker.js');
+                
+
+                console.log('Service worker registered! 😎', reg);
+                } catch (err) {
+                console.log('😥 Service worker registration failed: ', err);
+                }
+            });
             }
         }
         // needs to be fixed
@@ -99,11 +116,11 @@
                 </div>
                 <div class="flex flex-row items-center justify-center  mt-2">
                     <label for="matchNumber" class="text-xl font-bold">Match Number: </label>
-                    <input type="text" id="matchNumber" class="border-2 border-black rounded-md  ml-2">
+                    <input type="number" id="matchNumber" class="border-2 border-black rounded-md  ml-2">
                 </div>
                 <div class="flex flex-row items-center justify-center mt-2">
                     <label for="teamNumber" class="text-xl font-bold">Team Number: </label>
-                    <input type="text" id="teamNumber" class="border-2 border-black rounded-md  ml-2">
+                    <input type="number" id="teamNumber" class="border-2 border-black rounded-md  ml-2">
                 </div>
             </div>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3"
@@ -122,6 +139,21 @@
                 <label for="my-modal" class="btn" onclick="window.location.href = 'scout.html'">Begin!</label>
             </div>
         </div>
+    </div>
+
+    <input type="checkbox" id="modal-2" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">AntScout v.1.0.2 (March 9, 2023; 11:40 AM CST)</h3>
+            <h4>Release Notes</h4>
+            <p>- Offline functionality improved</p>
+            <p>- Improved input entry on basic info form</p>
+            <p>- Known bug: auto selection widget may not work properly on touch devices</p>
+            <div class="modal-action">
+            <label for="modal-2" class="btn">OK!</label>
+            </div>
+        </div>
+    </div>
 
 
 
