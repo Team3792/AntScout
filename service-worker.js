@@ -30,7 +30,6 @@ const precacheResources = [
   '/AntScout/jsoncrush.min.js',
   '/AntScout/service-worker.js',
   '/AntScout/BackspaceButton.js',
-  '/AntScout/FieldImage.png',
   '/AntScout/x.png',
   '/AntScout/auto-select.html'
 ];
