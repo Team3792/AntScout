@@ -244,6 +244,8 @@ function processData(dataArray) {
         teamData["where" + i] = where;
 
     }
+    teamData['autoPlatform'] = chargeStationScores[0];
+    teamData['endgamePlatform'] = chargeStationScores[1];
 }
 
 // completeScout using data from localStorage
